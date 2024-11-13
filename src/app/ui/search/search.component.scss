@@ -29,5 +29,23 @@
         width: 100%;
       }
     }
+
+    @media (max-width: 1360px) {
+      .spacer {
+        flex: 0.5;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .spacer {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        display: none;
+      }
+    }
   }
 }
