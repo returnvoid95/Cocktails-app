@@ -2,11 +2,11 @@
   <app-search
     [getRandomCocktailInProgress]="getRandomCocktailInProgress$ | async"
     (search)="onSearch($event)"
-    (getRandomCocktail)="getRandomCoctail()"
+    (getRandomCocktail)="getRandomCocktail()"
   ></app-search>
   <section class="scrollable">
     <app-search-result
-      [coctails]="foundCoctails$ | async"
+      [cocktails]="foundCocktails$ | async"
       [loading]="searchInProgress$ | async"
       (cardClick)="showCocktailModal($event)"
     ></app-search-result>

@@ -24,7 +24,7 @@ import { CocktailDetailsModalComponent } from './ui/cocktail-details-modal/cockt
 })
 export class AppComponent {
 
-  private readonly _foundCoctailsSubject = new BehaviorSubject<Cocktail[]>([]);
+  private readonly _foundCocktailsSubject = new BehaviorSubject<Cocktail[]>([]);
   private readonly _searchInProgressSubject = new BehaviorSubject<boolean>(false);
   private readonly _getRandomCocktailInProgressSubject = new BehaviorSubject<boolean>(false);
 
@@ -34,18 +34,18 @@ export class AppComponent {
   ) {}
 
   readonly searchInputControl = new FormControl<string | null>(null);
-  readonly foundCoctails$ = this._foundCoctailsSubject.asObservable();
+  readonly foundCocktails$ = this._foundCocktailsSubject.asObservable();
   readonly searchInProgress$ = this._searchInProgressSubject.asObservable();
   readonly getRandomCocktailInProgress$ = this._getRandomCocktailInProgressSubject.asObservable();
 
   async onSearch(title: string | null) {
     this._searchInProgressSubject.next(true);
-    const foundCoctails = await firstValueFrom(this.cocktailsService.getCocktailsByTitle(title));
-    this._foundCoctailsSubject.next(foundCoctails);
+    const foundCocktails = await firstValueFrom(this.cocktailsService.getCocktailsByTitle(title));
+    this._foundCocktailsSubject.next(foundCocktails);
     this._searchInProgressSubject.next(false);
   }
 
-  async getRandomCoctail() {
+  async getRandomCocktail() {
     this._getRandomCocktailInProgressSubject.next(true);
     const cocktail = await firstValueFrom(this.cocktailsService.getRandomCocktail());
     this._getRandomCocktailInProgressSubject.next(false);

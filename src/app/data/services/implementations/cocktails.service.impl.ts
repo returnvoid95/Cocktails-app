@@ -10,7 +10,7 @@ import { CocktailApiResponse, CocktailDto, convertCocktailDtoToEntity } from './
 })
 export class CocktailsServiceImpl implements CocktailsService {
 
-  private readonly _coctailsCache: Record<string, Cocktail[]> = {};
+  private readonly _cocktailsCache: Record<string, Cocktail[]> = {};
 
   constructor(
     @Inject(BASE_API_URL_TOKEN) private readonly baseUrl: string,
@@ -22,13 +22,13 @@ export class CocktailsServiceImpl implements CocktailsService {
       return of([]);
     }
 
-    if(this._coctailsCache[title]) {
-      return of(this._coctailsCache[title]);
+    if(this._cocktailsCache[title]) {
+      return of(this._cocktailsCache[title]);
     }
 
     return this.httpClient.get<CocktailApiResponse>(`${this.baseUrl}search.php?s=${title}`).pipe(
       map((response) => response.drinks?.map((dto) => convertCocktailDtoToEntity(dto)) ?? []),
-      tap((cocktails) => this._coctailsCache[title] = cocktails)
+      tap((cocktails) => this._cocktailsCache[title] = cocktails)
     );
   }
 
