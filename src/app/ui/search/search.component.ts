@@ -21,6 +21,8 @@ export class SearchComponent {
 
   readonly searchInputControl = new FormControl<string | null>(null);
 
+  @Input() getRandomCocktailInProgress: boolean | null | undefined;
+
   @Output() readonly search = new EventEmitter<string | null>();
   @Output() readonly getRandomCocktail = new EventEmitter<void>();
 
@@ -30,6 +32,14 @@ export class SearchComponent {
 
   onGetRandomCocktailClick() {
     this.getRandomCocktail.emit();
+  }
+
+  get icon() {
+    if(this.getRandomCocktailInProgress) {
+      return "pi pi-spin pi-spinner";
+    } else {
+      return "pi pi-question-circle";
+    }
   }
 
 }

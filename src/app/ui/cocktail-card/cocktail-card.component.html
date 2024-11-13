@@ -1,4 +1,4 @@
-<main [class.skeleton]="skeleton">
+<main [class.skeleton]="skeleton" (click)="cardClick.emit()">
   <p-card [header]="cocktail?.strDrink ?? ''" [subheader]="cocktail?.strGlass ?? ''">
     <p-header *ngIf="cocktail?.strDrinkThumbPreview">
       <img [ngSrc]="cocktail?.strDrinkThumbPreview ?? ''" width="100" height="100">

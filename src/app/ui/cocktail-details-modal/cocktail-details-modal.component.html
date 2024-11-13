@@ -1,1 +1,16 @@
-<p>cocktail-details-modal works!</p>
+<main>
+  <img [src]="cocktail.strDrinkThumb">
+  <h2>{{ cocktail.strDrink }}</h2>
+  <p>
+    <b>Glass:</b> {{ cocktail.strGlass }}
+  </p>
+  <p>
+    <b>How to cook:</b> {{ cocktail.strInstructions }}
+  </p>
+  <div>
+    <b>Ingredients:</b>
+    <ul>
+      <li *ngFor="let ingredient of cocktail.ingredients">{{ ingredient }}</li>
+    </ul>
+  </div>
+</main>

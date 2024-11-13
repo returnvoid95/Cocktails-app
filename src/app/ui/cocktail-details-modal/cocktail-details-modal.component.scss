@@ -1,0 +1,22 @@
+::ng-deep {
+  .cocktail-details-dialog {
+    .p-dialog-header {
+      padding-block: 10px;
+    }
+  }
+}
+
+:host {
+  main {
+    width: 500px;
+
+    img {
+      width: 260px;
+      height: 260px;
+    }
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+}

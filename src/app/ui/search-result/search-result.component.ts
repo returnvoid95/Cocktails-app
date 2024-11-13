@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Cocktail } from 'src/app/models';
 import { CocktailCardComponent } from '../cocktail-card/cocktail-card.component';
@@ -20,6 +20,12 @@ export class SearchResultComponent {
 
   @Input() coctails: Cocktail[] | null | undefined;
   @Input() loading: boolean | null | undefined;
+
+  @Output() readonly cardClick = new EventEmitter<Cocktail>();
+
+  onCardClick(cocktail: Cocktail) {
+    this.cardClick.emit(cocktail);
+  }
 
   trackByFn(index: number, item: Cocktail) {
     return item.idDrink;

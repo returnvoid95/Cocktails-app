@@ -1,5 +1,6 @@
 <main>
   <app-search
+    [getRandomCocktailInProgress]="getRandomCocktailInProgress$ | async"
     (search)="onSearch($event)"
     (getRandomCocktail)="getRandomCoctail()"
   ></app-search>
@@ -7,6 +8,7 @@
     <app-search-result
       [coctails]="foundCoctails$ | async"
       [loading]="searchInProgress$ | async"
+      (cardClick)="showCocktailModal($event)"
     ></app-search-result>
   </section>
 </main>

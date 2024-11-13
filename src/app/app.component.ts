@@ -3,9 +3,11 @@ import { SearchComponent } from './ui/search/search.component';
 import { SearchResultComponent } from './ui/search-result/search-result.component';
 import { CocktailsService } from './data';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, debounceTime, firstValueFrom, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { Cocktail } from './models';
 import { AsyncPipe } from '@angular/common';
+import { DialogService } from 'primeng/dynamicdialog';
+import { CocktailDetailsModalComponent } from './ui/cocktail-details-modal/cocktail-details-modal.component';
 
 @Component({
   selector: 'app-root',
@@ -17,18 +19,24 @@ import { AsyncPipe } from '@angular/common';
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DialogService]
 })
 export class AppComponent {
 
   private readonly _foundCoctailsSubject = new BehaviorSubject<Cocktail[]>([]);
   private readonly _searchInProgressSubject = new BehaviorSubject<boolean>(false);
+  private readonly _getRandomCocktailInProgressSubject = new BehaviorSubject<boolean>(false);
 
-  constructor(private readonly cocktailsService: CocktailsService) {}
+  constructor(
+    private readonly cocktailsService: CocktailsService,
+    private readonly dialogService: DialogService
+  ) {}
 
   readonly searchInputControl = new FormControl<string | null>(null);
   readonly foundCoctails$ = this._foundCoctailsSubject.asObservable();
   readonly searchInProgress$ = this._searchInProgressSubject.asObservable();
+  readonly getRandomCocktailInProgress$ = this._getRandomCocktailInProgressSubject.asObservable();
 
   async onSearch(title: string | null) {
     this._searchInProgressSubject.next(true);
@@ -38,7 +46,22 @@ export class AppComponent {
   }
 
   async getRandomCoctail() {
+    this._getRandomCocktailInProgressSubject.next(true);
     const cocktail = await firstValueFrom(this.cocktailsService.getRandomCocktail());
+    this._getRandomCocktailInProgressSubject.next(false);
+
+    if(!cocktail) {
+      return;
+    }
+
+    this.showCocktailModal(cocktail);
+  }
+
+  showCocktailModal(cocktail: Cocktail) {
+    this.dialogService.open(CocktailDetailsModalComponent, {
+      data: cocktail,
+      styleClass: 'cocktail-details-dialog'
+    });
   }
 
 }

@@ -21,6 +21,6 @@ export class CocktailCardComponent {
   @Input() cocktail: Cocktail | undefined;
   @Input() skeleton: boolean | undefined;
 
-  @Output() readonly onCardClick = new EventEmitter<void>();
+  @Output() readonly cardClick = new EventEmitter<void>();
 
 }
