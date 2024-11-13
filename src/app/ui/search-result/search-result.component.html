@@ -1,6 +1,6 @@
 <ng-container *ngIf="!loading; else loadingBlock">
   <app-cocktail-card
-    *ngFor="let cocktail of coctails; trackBy: trackByFn"
+    *ngFor="let cocktail of cocktails; trackBy: trackByFn"
     [cocktail]="cocktail"
     (cardClick)="onCardClick(cocktail)"
   ></app-cocktail-card>

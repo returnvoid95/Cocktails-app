@@ -18,7 +18,7 @@ export class SearchResultComponent {
 
   readonly arrayOfSkeletons = new Array(10).fill(null);
 
-  @Input() coctails: Cocktail[] | null | undefined;
+  @Input() cocktails: Cocktail[] | null | undefined;
   @Input() loading: boolean | null | undefined;
 
   @Output() readonly cardClick = new EventEmitter<Cocktail>();
