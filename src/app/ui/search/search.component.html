@@ -1,0 +1,9 @@
+<main>
+  <h1>The cocktails database</h1>
+  <section class="controls">
+    <input type="text" placeholder="Search cocktails..." pInputText [formControl]="searchInputControl" />
+    <p-button icon="pi pi-search" title="Search" (onClick)="onSearch()" />
+    <p-button icon="pi pi-question-circle" title="Get random cocktail" (onClick)="onGetRandomCocktailClick()" />
+  </section>
+  <div class="spacer"></div>
+</main>

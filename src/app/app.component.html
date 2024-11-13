@@ -1,0 +1,9 @@
+<main>
+  <app-search
+    (search)="onSearch($event)"
+    (getRandomCocktail)="getRandomCoctail()"
+  ></app-search>
+  <section class="scrollable">
+    <app-search-result></app-search-result>
+  </section>
+</main>
