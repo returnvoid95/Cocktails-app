@@ -4,6 +4,9 @@
     (getRandomCocktail)="getRandomCoctail()"
   ></app-search>
   <section class="scrollable">
-    <app-search-result></app-search-result>
+    <app-search-result
+      [coctails]="foundCoctails$ | async"
+      [loading]="searchInProgress$ | async"
+    ></app-search-result>
   </section>
 </main>

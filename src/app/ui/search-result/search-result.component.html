@@ -1,1 +1,6 @@
-<p>search-result works!</p>
+<ng-container *ngIf="!loading; else loadingBlock">
+  <app-cocktail-card *ngFor="let cocktail of coctails; trackBy: trackByFn" [cocktail]="cocktail"></app-cocktail-card>
+</ng-container>
+<ng-template #loadingBlock>
+  <app-cocktail-card *ngFor="let skeleton of arrayOfSkeletons" [skeleton]="true"></app-cocktail-card>
+</ng-template>

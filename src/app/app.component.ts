@@ -5,11 +5,13 @@ import { CocktailsService } from './data';
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, debounceTime, firstValueFrom, Observable, of, switchMap } from 'rxjs';
 import { Cocktail } from './models';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    AsyncPipe,
     SearchComponent,
     SearchResultComponent
   ],
@@ -20,15 +22,19 @@ import { Cocktail } from './models';
 export class AppComponent {
 
   private readonly _foundCoctailsSubject = new BehaviorSubject<Cocktail[]>([]);
+  private readonly _searchInProgressSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private readonly cocktailsService: CocktailsService) {}
 
   readonly searchInputControl = new FormControl<string | null>(null);
   readonly foundCoctails$ = this._foundCoctailsSubject.asObservable();
+  readonly searchInProgress$ = this._searchInProgressSubject.asObservable();
 
   async onSearch(title: string | null) {
+    this._searchInProgressSubject.next(true);
     const foundCoctails = await firstValueFrom(this.cocktailsService.getCocktailsByTitle(title));
     this._foundCoctailsSubject.next(foundCoctails);
+    this._searchInProgressSubject.next(false);
   }
 
   async getRandomCoctail() {

@@ -4,5 +4,6 @@ export type Cocktail = {
   strGlass: string | null;
   strInstructions: string | null;
   strDrinkThumb: string | null;
+  strDrinkThumbPreview: string | null;
   ingredients: string[];
 }

@@ -24,7 +24,7 @@ export type CocktailDto = {
 }
 
 export type CocktailApiResponse = {
-  drinks: CocktailDto[];
+  drinks: CocktailDto[] | null;
 }
 
 export function convertCocktailDtoToEntity(dto: CocktailDto): Cocktail {
@@ -40,6 +40,7 @@ export function convertCocktailDtoToEntity(dto: CocktailDto): Cocktail {
     strGlass: dto.strGlass,
     strInstructions: dto.strInstructions,
     strDrinkThumb: dto.strDrinkThumb,
+    strDrinkThumbPreview: dto.strDrinkThumb ? `${dto.strDrinkThumb}/preview` : null,
     ingredients: ingredients.filter((ingredient) => ingredient !== null) as string[]
   }
 }

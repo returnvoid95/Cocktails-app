@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  justify-content: center;
+
+  main {
+    cursor: pointer;
+    width: fit-content;
+    width: 300px;
+    height: 300px;
+    max-height: 300px;
+
+    ::ng-deep {
+      .p-card {
+        height: 100%;
+      }
+    }
+
+    p-header {
+      display: flex;
+      justify-content: center;
+      padding-block: 10px;
+
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    p-card-title,
+    p-card-subtitle {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}

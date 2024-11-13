@@ -5,6 +5,6 @@ export abstract class CocktailsService {
 
   abstract getCocktailsByTitle(title: string | null): Observable<Cocktail[]>;
 
-  abstract getRandomCocktail(): Observable<Cocktail>;
+  abstract getRandomCocktail(): Observable<Cocktail | null>;
 
 }
